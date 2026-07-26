@@ -3,7 +3,7 @@ import type { Route } from '@/types';
 import { handler } from './common';
 
 export const route: Route = {
-    path: '/video/lists/258_1',
+    path: '/video/lists/:id',
     parameters: { id: '分类 id，见下表，可在对应分类页 URL 中找到' },
     name: '视频',
     example: '/jiemian/video/lists/258_1',

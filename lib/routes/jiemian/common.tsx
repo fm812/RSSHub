@@ -8,13 +8,11 @@ import ofetch from '@/utils/ofetch';
 import { parseDate } from '@/utils/parse-date';
 
 export const handler = async (ctx): Promise<Data> => {
-    const { category, id } = ctx.req.param();
     const limit = ctx.req.query('limit') ? Number(ctx.req.query('limit')) : 50;
 
     const rootUrl = 'https://www.jiemian.com';
-    // Reason: lists.ts uses :id param, other routes use :category or hardcoded paths
-    const pathSegment = category || (id ? `lists/${id}` : '');
-    const currentUrl = new URL(pathSegment ? `${pathSegment}.html` : '', rootUrl).href;
+    const pathSegment = ctx.req.path.replace('/jiemian', '');
+    const currentUrl = new URL(`${pathSegment}.html`, rootUrl).href;
 
     const response = await ofetch(currentUrl);
 
